@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Terminal=false
+Name=Sakis3G
+Name[en_US]=Sakis3G
+Exec=/usr/bin/sakis3g clicked
+Comment=Manages 3G internet connection and 3G USB modems
+Comment[en_US]=Manages 3G internet connection and 3G USB modems
+Icon=/home/traper/.local/share/icons/sakis3g.png
+Icon[en_US]=/home/traper/.local/share/icons/sakis3g.png
+GenericName=
+GenericName[en_US]=

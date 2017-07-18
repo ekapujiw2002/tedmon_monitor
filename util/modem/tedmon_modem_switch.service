@@ -1,0 +1,15 @@
+[Unit]
+Description=Usb modem switcher
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/screen -dmS tedmon_modem_switcher /usr/bin/tedmon_modem_switcher
+ExecStop=/usr/bin/screen -S tedmon_modem_switcher -X quit
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+
+

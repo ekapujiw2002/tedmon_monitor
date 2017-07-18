@@ -1,0 +1,27 @@
+#!/bin/bash
+#loop check modem connectivity, reconnect if neccessary
+while true; do
+    echo "Checking connection status...."
+    sakis3g status | grep "Not connected" > /dev/null
+    if [ $? -eq 0 ]; then
+        echo "Disconnected, opening connection..."
+
+        #try to open modem connection in background
+        #sakis3g --sudo "connect" > /dev/null 2>&1 &
+        sakis3g --sudo "connect" > /dev/null 2>&1
+
+        #recheck connection
+        #sleep 30
+        sakis3g status | grep "Not connected" > /dev/null
+        if [ $? -eq 0 ]; then
+            echo "Connection failed. Retry in 5 seconds..."
+            sleep 5
+        else
+            echo "Connection established. Recheck in 30 seconds..."
+            sleep 30
+        fi       
+    else
+        echo "Connection established. Recheck in 30 seconds..."
+        sleep 30
+    fi
+done

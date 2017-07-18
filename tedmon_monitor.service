@@ -1,0 +1,12 @@
+[Unit]
+Description=Tedmon monitoring program
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/screen -dmS tedmon_ctrl /usr/bin/tedmon_monitor
+ExecStop=/usr/bin/screen -S tedmon_ctrl -X quit
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

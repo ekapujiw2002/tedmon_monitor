@@ -1,0 +1,12 @@
+[Unit]
+Description=RTC clock
+Before=systemd-timesyncd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+#ExecStart=/etc/systemd/system/rtc.sh
+ExecStart=/usr/bin/hwclock -s
+
+[Install]
+WantedBy=multi-user.target

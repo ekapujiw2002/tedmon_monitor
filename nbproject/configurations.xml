@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>ini.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <logicalFolder name="util" displayName="util" projectFiles="true">
+        <logicalFolder name="ap" displayName="ap" projectFiles="true">
+          <itemPath>util/ap/dnsmasq.conf</itemPath>
+          <itemPath>util/ap/hostapd</itemPath>
+          <itemPath>util/ap/hostapd.conf</itemPath>
+          <itemPath>util/ap/tedmon_ap.service</itemPath>
+          <itemPath>util/ap/tedmon_ap_init.sh</itemPath>
+          <itemPath>util/ap/tedmon_ap_timer.timer</itemPath>
+        </logicalFolder>
+        <logicalFolder name="modem" displayName="modem" projectFiles="true">
+          <logicalFolder name="umtskeepr" displayName="umtskeepr" projectFiles="true">
+            <itemPath>util/modem/umtskeepr/LICENSE.txt</itemPath>
+            <itemPath>util/modem/umtskeepr/README.html</itemPath>
+            <itemPath>util/modem/umtskeepr/README.txt</itemPath>
+            <itemPath>util/modem/umtskeepr/changelog.txt</itemPath>
+            <itemPath>util/modem/umtskeepr/favicon.ico</itemPath>
+            <itemPath>util/modem/umtskeepr/robots.txt</itemPath>
+            <itemPath>util/modem/umtskeepr/sakis3g</itemPath>
+            <itemPath>util/modem/umtskeepr/style.css</itemPath>
+            <itemPath>util/modem/umtskeepr/umtskeeper</itemPath>
+            <itemPath>util/modem/umtskeepr/umtskeeper.conf.sample</itemPath>
+          </logicalFolder>
+          <itemPath>util/modem/sakis3g.conf</itemPath>
+          <itemPath>util/modem/sakis3g.desktop</itemPath>
+          <itemPath>util/modem/sakis3g.tar.gz</itemPath>
+          <itemPath>util/modem/tedmon_modem_autoconnect</itemPath>
+          <itemPath>util/modem/tedmon_modem_autoconnect.service</itemPath>
+          <itemPath>util/modem/tedmon_modem_autoconnect.timer</itemPath>
+          <itemPath>util/modem/tedmon_modem_switch.service</itemPath>
+          <itemPath>util/modem/tedmon_modem_switcher</itemPath>
+          <itemPath>util/modem/umtskeeper.tar.gz</itemPath>
+          <itemPath>util/modem/usb_modeswitch.conf</itemPath>
+        </logicalFolder>
+        <logicalFolder name="rtc" displayName="rtc" projectFiles="true">
+          <itemPath>util/rtc/rtc.service</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>ini.c</itemPath>
+      <itemPath>tedmon.conf</itemPath>
+      <itemPath>tedmon_monitor.service</itemPath>
+      <itemPath>tedmon_monitor_21062017.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>util</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>pigpio</linkerLibLibItem>
+            <linkerLibLibItem>rt</linkerLibLibItem>
+            <linkerOptionItem>-pthread</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="ini.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ini.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tedmon.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tedmon_monitor.service" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tedmon_monitor_21062017.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="util/ap/dnsmasq.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/hostapd" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/hostapd.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/tedmon_ap.service" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/tedmon_ap_init.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/tedmon_ap_timer.timer" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/sakis3g.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/sakis3g.desktop" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/sakis3g.tar.gz" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_autoconnect"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_autoconnect.service"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_autoconnect.timer"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_switch.service"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_switcher" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeeper.tar.gz" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/LICENSE.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/README.html" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/README.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/changelog.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/favicon.ico" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/robots.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/sakis3g" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/style.css" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/umtskeeper" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/umtskeeper.conf.sample"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/usb_modeswitch.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/rtc/rtc.service" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>pigpio</linkerLibLibItem>
+            <linkerLibLibItem>rt</linkerLibLibItem>
+            <linkerOptionItem>-pthread</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="ini.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ini.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tedmon.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tedmon_monitor.service" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tedmon_monitor_21062017.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="util/ap/dnsmasq.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/hostapd" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/hostapd.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/tedmon_ap.service" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/tedmon_ap_init.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/ap/tedmon_ap_timer.timer" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/sakis3g.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/sakis3g.desktop" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/sakis3g.tar.gz" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_autoconnect"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_autoconnect.service"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_autoconnect.timer"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_switch.service"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/tedmon_modem_switcher" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeeper.tar.gz" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/LICENSE.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/README.html" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/README.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/changelog.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/favicon.ico" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/robots.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/sakis3g" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/style.css" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/umtskeeper" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/modem/umtskeepr/umtskeeper.conf.sample"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="util/modem/usb_modeswitch.conf" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="util/rtc/rtc.service" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

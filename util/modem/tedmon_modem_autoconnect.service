@@ -1,0 +1,17 @@
+[Unit]
+Description=Usb modem auto connection
+
+[Service]
+Type=forking
+#User=enco1
+#WorkingDirectory=/home/enco1
+ExecStart=/usr/bin/screen -dmS tedmon_modem_autoconnect /usr/bin/tedmon_modem_autoconnect
+ExecStop=/usr/bin/screen -S tedmon_modem_autoconnect -X quit
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
+
+

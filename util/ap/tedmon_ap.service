@@ -1,0 +1,12 @@
+[Unit]
+Description=Wifi soft ap
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/screen -dmS tedmon_ap /usr/bin/tedmon_ap_init wlan1
+ExecStop=/usr/bin/screen -S tedmon_ap -X quit
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
