@@ -1,6 +1,5 @@
 /* 
  * File:   tedmon_monitor_21062017.c
- * Author: EX4
  *
  * Created on June 21, 2017, 2:13 PM
  */
@@ -31,7 +30,7 @@
  id device
  */
 //#define DEVICE_ID   "TEDMON01"
-#define DEV_VERSION "14072017"
+#define DEV_VERSION "28072017-093122"
 
 /*
  define pin
@@ -45,8 +44,8 @@
 /*
  tanki konstant dlm cm
  */
-//#define TANKI_HEIGHT_MAX    148.0
-//#define TANKI_JARI_JARI     65.0
+//#define TANKI_HEIGHT_MAX    99.0
+//#define TANKI_JARI_JARI     18.0
 
 /*
  batas level air dlm cm
@@ -84,7 +83,7 @@ typedef enum {
 //#define SERVER_URL "http://monitoringair.xyz/api.php"
 
 //telp admin
-//#define TELP_NUM_ADMIN  "081277160225"
+//#define TELP_NUM_ADMIN  "0895336680038"
 
 /*
  proto
@@ -122,7 +121,7 @@ float flow_meter_debit = 0.0;
 //error code
 sys_error_t device_error_code = ERR_NONE;
 uint32_t cnt_1second = 0;
-char pump_state = PI_OFF;
+char pump_state = PI_ON;
 uint32_t cnt_t30_sec = 0;
 char is_sending_data = 0;
 char buzzerMustOn = 0;
@@ -133,13 +132,13 @@ char is_test_mode = 0;
 cfg_struct_t config_dev = {
     .isvalid = 0,
     .dev_id = "TEDMON01",
-    .telp1 = "081277160225",
-    .telp2 = "081277160225",
+    .telp1 = "0895336680038",
+    .telp2 = "0895336680038",
     .server_url = "http://monitoringair.xyz/api.php",
-    .tank_hmax = 148.0,
-    .tank_radius = 65,
-    .water_upper_level_limit = 148.0,
-    .water_lower_level_limit = 29.6
+    .tank_hmax = 85.0,
+    .tank_radius = 18,
+    .water_upper_level_limit = 85.0,
+    .water_lower_level_limit = 17
 };
 
 /**
@@ -189,9 +188,10 @@ char run_command(const char *cmd, char **message) {
  * @param dx
  * @return 
  */
-int curl_post_data(const char *server, const char *id, float hx, float vx, float dx) {
+int curl_post_data(const char *server, const char *id, float hx, float vx, float dx, char errx) {
     char cmdx[250];
-    snprintf(cmdx, sizeof (cmdx), "curl -s --connect-timeout 10 -X POST -F 'c=1' -F 'id=%s' -F 'h=%f' -F 'v=%f' -F 'd=%f' %s 2>&1 | grep -i '\"error\":0'", id, hx, vx, dx, server);
+    //    snprintf(cmdx, sizeof (cmdx), "curl -s --connect-timeout 10 -X POST -F 'c=1' -F 'id=%s' -F 'h=%f' -F 'v=%f' -F 'd=%f' %s 2>&1 | grep -i '\"error\":0'", id, hx, vx, dx, server);
+    snprintf(cmdx, sizeof (cmdx), "curl -s --connect-timeout 30 \"%s?c=1&id=%s&h=%f&v=%f&d=%f&e=%d\" 2>&1 | grep -i '\"error\":0'", server, id, hx, vx, dx, errx);
     log_data("SEND DATA TO SERVER : %s\n", cmdx);
     return system(cmdx);
 }
@@ -275,18 +275,18 @@ void flowMeterTimeout(void) {
     //    check range
     // pompa must on
     if (sonar_result.height_residu < config_dev.water_lower_level_limit) {
-//        gpioWrite(OUT_RELAY_POMPA, PI_LOW);
+        //        gpioWrite(OUT_RELAY_POMPA, PI_LOW);
         pump_state = PI_ON;
     }
 
     // pompa must off
     if (sonar_result.height_residu >= config_dev.water_upper_level_limit) {
-//        gpioWrite(OUT_RELAY_POMPA, PI_HIGH);
+        //        gpioWrite(OUT_RELAY_POMPA, PI_HIGH);
         pump_state = PI_OFF;
         gpioWrite(OUT_RELAY_BUZZER, PI_LOW);
     }
-    log_data("PUMP STATE = %d", pump_state);
-    gpioWrite(OUT_RELAY_POMPA, !pump_state);
+    gpioWrite(OUT_RELAY_POMPA, pump_state == PI_ON ? PI_OFF : PI_ON);
+    log_data("PUMP STATE = %d %d %d", pump_state, gpioRead(OUT_RELAY_POMPA), gpioRead(OUT_RELAY_BUZZER));
 
     //check error per 10sec
     cnt_1second++;
@@ -310,7 +310,7 @@ void flowMeterTimeout(void) {
         log_data("ERROR STATE = %u", device_error_code);
 
         //        stop buzzer
-        if (device_error_code == ERR_NONE)
+        if ((device_error_code == ERR_NONE) || ((sonar_result.height_residu < config_dev.water_upper_level_limit) && (sonar_result.height_residu > config_dev.water_lower_level_limit)))
             gpioWrite(OUT_RELAY_BUZZER, PI_HIGH);
     }
 }
@@ -375,7 +375,7 @@ void timer_messaging_job(void) {
                 log_data("MODEM CONNECTED");
                 log_data("SEND DATA TO SERVER");
                 if (!is_test_mode) {
-                    log_data("RESULT %d", curl_post_data(config_dev.server_url, config_dev.dev_id, sonar_result.height_residu, sonar_result.volume, flow_meter_debit));
+                    log_data("RESULT %d", curl_post_data(config_dev.server_url, config_dev.dev_id, sonar_result.height_residu, sonar_result.volume, flow_meter_debit, device_error_code));
                 }
             } else {
                 log_data("MODEM DISCONNECTED!!!");
@@ -409,6 +409,9 @@ int gpio_init() {
                     (gpioSetMode(OUT_RELAY_POMPA, PI_OUTPUT) == 0)) ? 0 : 1;
 
             if (resx == 0) {
+                gpioWrite(OUT_RELAY_BUZZER, PI_ON);
+                gpioWrite(OUT_RELAY_POMPA, pump_state == 1 ? PI_OFF : PI_ON);
+
                 /* update sonar 20 times a second, timer #0 */
                 resx = ((gpioSetTimerFunc(0, 50, sonarTrigger) == 0) && /* every 50ms */
 
@@ -545,6 +548,8 @@ void load_configuration_file() {
  * main program
  */
 int main(int argc, char** argv) {
+
+
     //    welcome message
     log_data("TEDMON MONITOR " DEV_VERSION " -- Program started...");
 
@@ -571,12 +576,12 @@ int main(int argc, char** argv) {
     sleep(5);
 
     /*
-     signal handler
+ signal handler
      */
     signal(SIGINT, system_signal_handler);
     signal(SIGTERM, system_signal_handler);
-    //    setvbuf(stdout, NULL, _IONBF, 0);
-    //    setvbuf(stderr, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    setvbuf(stderr, NULL, _IONBF, 0);
 
     //sorry, im gonna sleep for now, see youu, Zzzzzzzzzzzzzzzzzzz
     log_data("I'M GOING TO SLEEP NOW. BYE......");
